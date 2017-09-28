@@ -1,0 +1,54 @@
+{{ #if initialized }}
+<iframe title="Google Maps" frameborder="0" height="{{ height }}" 
+  width="{{ width }}" src="{{ url }}" allowfullscreen="{{allowFullscreen}}">
+</iframe>
+{{ /if }}
+
+<style>
+  iframe {
+    display: block;
+    border:0px;
+  }
+</style>
+
+<script>
+
+  export default {
+
+    data () {
+      return {
+        height: '100%',
+        width: '100%',
+        allowFullscreen: true,
+        apiKey: 'YOUR_API_KEY',
+        mapMode: 'place'
+      }
+    },
+
+    oncreate () {
+      var apiKey = this.get('apiKey')
+      var mapMode = this.get('mapMode')
+      var mapModes = {
+        place: ['q'],
+        directions: ['origin', 'destination', 'waypoints', 'mode', 'avoid','units'],
+        search: ['q'],
+        view: ['center', 'zoom', 'maptype', 'language', 'region'],
+        streetview: ['location', 'pano', 'heading', 'pitch', 'fov', 'language', 'region']
+      }
+
+      var url = 'https://www.google.com/maps/embed/v1/' + mapMode 
+        + '?key=' + apiKey
+
+      var params = mapModes[mapMode] || []
+      var that = this
+      params.forEach(function(p) {
+        var v = that.get(p)
+        if (v) url += '&' + p + '=' + v
+      })
+
+      this.set({url:encodeURI(url), initialized: true})   
+    }
+
+  }
+
+</script>
