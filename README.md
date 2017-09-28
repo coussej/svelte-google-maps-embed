@@ -4,6 +4,12 @@ Svelte wrapper for the [official Google Maps Embed api](https://developers.googl
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
+## Installation
+
+```
+npm install --save svelte-google-maps-embed
+```
+
 ## Usage
 
 Use as a normal svelte component. 
